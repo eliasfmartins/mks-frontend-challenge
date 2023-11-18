@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ProductCard } from "./components/ProductCard";
+import { BuyCarr } from "./components/BuyCarr";
 interface Product {
   id: number;
   name: string;
@@ -14,6 +15,7 @@ interface Product {
 }
 export default function Home() {
   const [dataCards, setDataCards] = useState({ products: [], count: 0 })
+  const [openCar, setOpenCar] = useState<boolean>(true)
 
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function Home() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-
+        { openCar && <BuyCarr/>}
       </PageContent>
     </PageContainer>
   );
