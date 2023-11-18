@@ -25,7 +25,8 @@ export const HeaderContainer = styled.header`
  display: flex;
  justify-content: center;
  align-items: center;
-  background: blue;
+  background: #0F52BA;
+;
   height: 101px;
 
 `
