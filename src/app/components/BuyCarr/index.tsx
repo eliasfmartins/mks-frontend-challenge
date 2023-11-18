@@ -1,11 +1,14 @@
+import { useCarrinho } from '@/app/context/CarrContext';
 import styled from 'styled-components';
 export const BuyCarr = () => {
+  const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
+
   return (
     <BuycarrContainer>
       <div className='header'>
         <h2>Carrinho <br />
           de compras</h2>
-        <button>
+        <button onClick={()=> setOpenCar(false)}>
           X
         </button>
       </div>

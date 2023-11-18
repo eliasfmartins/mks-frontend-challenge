@@ -1,7 +1,10 @@
 import styled from "styled-components"
 import { Carr } from "./carr"
+import { useCarrinho } from "@/app/context/CarrContext";
 
 export const Header = () => {
+  const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
+
   return (
     <HeaderContainer>
       <HeaderContent>
@@ -12,7 +15,7 @@ export const Header = () => {
           </p>
         </div>
         <div className="carr">
-          <button>
+          <button onClick={() => setOpenCar(true)}>
             <Carr />
             0</button>
 

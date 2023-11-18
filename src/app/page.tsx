@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ProductCard } from "./components/ProductCard";
 import { BuyCarr } from "./components/BuyCarr";
+import { useCarrinho } from "./context/CarrContext";
 interface Product {
   id: number;
   name: string;
@@ -15,7 +16,7 @@ interface Product {
 }
 export default function Home() {
   const [dataCards, setDataCards] = useState({ products: [], count: 0 })
-  const [openCar, setOpenCar] = useState<boolean>(true)
+  const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
 
 
   useEffect(() => {
