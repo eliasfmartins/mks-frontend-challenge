@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, ReactNode, Dispatch, SetStateAction } from 'react';
 
 interface Product {
+  quantidade: number;
   id: number;
   name: string;
   brand: string;

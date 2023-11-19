@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Buycar } from "./buycar";
+import { useCarrinho } from "@/app/context/CarrContext";
 interface ProductCardProps {
   product: {
     id: number;
@@ -14,6 +15,8 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
+
   return (
     <CardContainer key={product.id}>
       <CardContent>
@@ -26,7 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <p>{product.description}</p>
         </div>
       </CardContent>
-      <div className="buy">
+      <div className="buy" onClick={() => setItensCar(prev => [...prev, product])}>
         <Buycar /> COMPRAR
       </div>
     </CardContainer>
@@ -89,13 +92,11 @@ h2{
 }
 img{
   max-width: 148px;
-  max-height: 138px;
+  height: 120px;
   margin-bottom: 5px;
  }
 
 `;
 
-const Icon = styled.div`
-  // Adicione estilos conforme necessário para o ícone de compra
-`;
+
 

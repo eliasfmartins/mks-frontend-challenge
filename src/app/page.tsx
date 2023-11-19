@@ -41,7 +41,7 @@ export default function Home() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-        { openCar && <BuyCarr/>}
+        {openCar && <BuyCarr />}
       </PageContent>
     </PageContainer>
   );
