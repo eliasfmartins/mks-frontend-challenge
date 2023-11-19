@@ -3,6 +3,14 @@ import { Carr } from "./carr";
 import { useCarrinho } from "@/app/context/CarrContext";
 export const Header = () => {
 	const { setOpenCar, itensCar, setOpenCarClose } = useCarrinho();
+
+
+	const quantidadeItensCarrinho = itensCar.reduce((total, produto) => {
+		if (produto.quantidade) {
+			return total + produto.quantidade;
+		}
+		return total;
+	}, 0);
 	const handleCar = () => {
 		setOpenCar(true);
 		setOpenCarClose(false);
@@ -21,7 +29,7 @@ export const Header = () => {
 						handleCar();
 					}}>
 						<Carr />
-						{itensCar.length}
+						{quantidadeItensCarrinho}
 					</button>
 				</div>
 			</HeaderContent>
