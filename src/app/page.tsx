@@ -1,39 +1,38 @@
 'use client'
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { ProductCard } from "./components/ProductCard";
-import { BuyCarr } from "./components/BuyCarr";
-import { useCarrinho } from "./context/CarrContext";
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { ProductCard } from './components/ProductCard'
+import { BuyCarr } from './components/BuyCarr'
+import { useCarrinho } from './context/CarrContext'
+
 interface Product {
-  id: number;
-  name: string;
-  brand: string;
-  description: string;
-  photo: string;
-  price: string;
-  createdAt: string;
-  updatedAt: string;
+  id: number
+  name: string
+  brand: string
+  description: string
+  photo: string
+  price: string
+  createdAt: string
+  updatedAt: string
   quantidade: number
 }
 export default function Home() {
   const [dataCards, setDataCards] = useState({ products: [], count: 0 })
-  const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
-
+  const { openCar } = useCarrinho()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=8&sortBy=id&orderBy=DESC');
-        const data = await response.json();
-        setDataCards(data);
-        console.log(data);
+        const response = await fetch('https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=8&sortBy=id&orderBy=DESC')
+        const data = await response.json()
+        setDataCards(data)
       } catch (error) {
-        console.error("Erro ao obter dados:", error);
+        console.error('Erro ao obter dados:', error)
       }
-    };
+    }
 
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
   return (
     <PageContainer>
       <PageContent>
@@ -45,7 +44,7 @@ export default function Home() {
         {openCar && <BuyCarr />}
       </PageContent>
     </PageContainer>
-  );
+  )
 }
 export const PageContainer = styled.main`
   display: flex;

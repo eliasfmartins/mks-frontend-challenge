@@ -1,41 +1,39 @@
-import styled from "styled-components";
-import { Buycar } from "./buycar";
-import { useCarrinho } from "@/app/context/CarrContext";
+import React from 'react'
+import styled from 'styled-components'
+import { Buycar } from './buycar'
+import { useCarrinho } from '@/app/context/CarrContext'
 interface ProductCardProps {
   product: {
-    id: number;
-    name: string;
-    brand: string;
-    description: string;
-    photo: string;
-    price: string;
-    createdAt: string;
-    updatedAt: string;
+    id: number
+    name: string
+    brand: string
+    description: string
+    photo: string
+    price: string
+    createdAt: string
+    updatedAt: string
     quantidade: number
-  };
+  }
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
+export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCardProps) => {
+  const { itensCar, setItensCar } = useCarrinho()
   const handleAddItem = (novoItem: typeof itensCar[0]) => {
-    const itemIndex = itensCar.findIndex(item => item.id === novoItem.id);
+    const itemIndex = itensCar.findIndex(item => item.id === novoItem.id)
 
     if (itemIndex !== -1) {
-      // Se o item já existe, aumente a quantidade
-      const novoCarrinho = [...itensCar];
-      novoCarrinho[itemIndex].quantidade += 1;
-      setItensCar(novoCarrinho);
+      const novoCarrinho = [...itensCar]
+      novoCarrinho[itemIndex].quantidade += 1
+      setItensCar(novoCarrinho)
     } else {
-      // Se o item não existe, verifique se o número de produtos diferentes no carrinho é menor que 3
       if (itensCar.length >= 3) {
         window.alert('Você atingiu o limite de 3 produtos diferentes no carrinho.')
-        return;
+        return
       }
 
-      // Adicione ao carrinho com quantidade 1
-      setItensCar(prevItensCar => [...prevItensCar, { ...novoItem, quantidade: 1 }]);
+      setItensCar(prevItensCar => [...prevItensCar, { ...novoItem, quantidade: 1 }])
     }
-  };
+  }
 
   return (
     <CardContainer key={product.id}>
@@ -56,12 +54,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <p>{product.description}</p>
         </div>
       </CardContent>
-      <div className="buy" onClick={() => handleAddItem(product)}>
+      <div className="buy" onClick={() => { handleAddItem(product) }}>
         <Buycar /> COMPRAR
       </div>
     </CardContainer>
-  );
-};
+  )
+}
 
 const CardContainer = styled.div`
 box-shadow: 0px 2px 8px 0px #00000022;
@@ -87,7 +85,7 @@ border-radius: 8px;
   border-radius: 0 0 8px 8px;
   
 }
-`;
+`
 
 const CardContent = styled.div`
 padding: 5px;
@@ -127,7 +125,4 @@ img{
   margin-bottom: 5px;
  }
 
-`;
-
-
-
+`

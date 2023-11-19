@@ -1,75 +1,74 @@
-import { useCarrinho } from '@/app/context/CarrContext';
-import styled from 'styled-components';
-import { CartItem } from '../CardCarrinho';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
+import { useCarrinho } from '@/app/context/CarrContext'
+import styled from 'styled-components'
+import { CartItem } from '../CardCarrinho'
 export const BuyCarr = () => {
-  const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
-  const [valorTotal, setValorTotal] = useState<number>(0);
-  const [quantidadeItens, setQuantidadeItens] = useState<number>(0);
+  const { setOpenCar, itensCar, setItensCar } = useCarrinho()
+  const [valorTotal, setValorTotal] = useState<number>(0)
+  const [setQuantidadeItens] = useState<number>(0)
 
   useEffect(() => {
     // Atualizar o valor total e a quantidade de itens sempre que o carrinho for modificado
-    calcularTotal();
-  }, [itensCar]);
+    calcularTotal()
+  }, [itensCar])
 
   const handleRemoveItem = (id: number) => {
     // Filtrar os itens do carrinho para remover o item com o ID correspondente
-    const novoCarrinho = itensCar.filter(item => item.id !== id);
+    const novoCarrinho = itensCar.filter(item => item.id !== id)
 
     // Atualizar o estado do carrinho com o novo array
-    setItensCar(novoCarrinho);
-  };
-
+    setItensCar(novoCarrinho)
+  }
 
   const handleIncreaseQuantity = (id: number) => {
-    const novoCarrinho = [...itensCar];
-    const itemIndex = novoCarrinho.findIndex(item => item.id === id);
+    const novoCarrinho = [...itensCar]
+    const itemIndex = novoCarrinho.findIndex(item => item.id === id)
 
     if (itemIndex !== -1) {
-      novoCarrinho[itemIndex].quantidade += 1;
-      setItensCar(novoCarrinho);
-      console.log('Novo estado do carrinho após aumento de quantidade:', novoCarrinho);
+      novoCarrinho[itemIndex].quantidade += 1
+      setItensCar(novoCarrinho)
+      console.log('Novo estado do carrinho após aumento de quantidade:', novoCarrinho)
     }
-  };
+  }
 
   const handleDecreaseQuantity = (id: number) => {
-    const novoCarrinho = [...itensCar];
-    const itemIndex = novoCarrinho.findIndex(item => item.id === id);
+    const novoCarrinho = [...itensCar]
+    const itemIndex = novoCarrinho.findIndex(item => item.id === id)
 
     if (novoCarrinho[itemIndex].quantidade > 1) {
-      novoCarrinho[itemIndex].quantidade -= 1;
+      novoCarrinho[itemIndex].quantidade -= 1
     } else {
-      novoCarrinho.splice(itemIndex, 1);
+      novoCarrinho.splice(itemIndex, 1)
     }
 
-    setItensCar(novoCarrinho);
-  };
+    setItensCar(novoCarrinho)
+  }
 
   const calcularTotal = () => {
-    let total = 0;
-    let quantidade = 0;
+    let total = 0
+    let quantidade = 0
 
     itensCar.forEach(item => {
-      total += parseFloat(item.price) * item.quantidade;
-      quantidade += item.quantidade;
-    });
+      total += parseFloat(item.price) * item.quantidade
+      quantidade += item.quantidade
+    })
 
-    setValorTotal(total);
-    setQuantidadeItens(quantidade);
-  };
+    setValorTotal(total)
+    setQuantidadeItens(quantidade)
+  }
   return (
     <BuycarrContainer>
       <div className='header'>
         <h2>Carrinho <br />
           de compras</h2>
-        <button onClick={() => setOpenCar(false)}>
+        <button onClick={() => { setOpenCar(false) }}>
           X
         </button>
       </div>
       <div className='carrinho'>
         {itensCar.map(item => (
-          <CartItem key={item.id} item={item} onRemove={handleRemoveItem} onIncrease={() => handleIncreaseQuantity(item.id)}
-            onDecrease={() => handleDecreaseQuantity(item.id)} />
+          <CartItem key={item.id} item={item} onRemove={handleRemoveItem} onIncrease={() => { handleIncreaseQuantity(item.id) }}
+            onDecrease={() => { handleDecreaseQuantity(item.id) }} />
         ))}
       </div>
       <div className='total'>

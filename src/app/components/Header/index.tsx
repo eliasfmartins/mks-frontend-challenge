@@ -1,9 +1,10 @@
-import styled from "styled-components"
-import { Carr } from "./carr"
-import { useCarrinho } from "@/app/context/CarrContext";
+import React from 'react'
+import styled from 'styled-components'
+import { Carr } from './carr'
+import { useCarrinho } from '@/app/context/CarrContext'
 
 export const Header = () => {
-  const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
+  const { setOpenCar, itensCar } = useCarrinho()
 
   return (
     <HeaderContainer>
@@ -15,13 +16,11 @@ export const Header = () => {
           </p>
         </div>
         <div className="carr">
-          <button onClick={() => setOpenCar(true)}>
+          <button onClick={() => { setOpenCar(true) }}>
             <Carr />
 
             {itensCar.length}
-            </button>
-            
-           
+          </button>
 
         </div>
       </HeaderContent>
@@ -33,7 +32,6 @@ export const HeaderContainer = styled.header`
  justify-content: center;
  align-items: center;
   background: #0F52BA;
-;
   height: 101px;
 
 `
@@ -57,7 +55,6 @@ font-size: 20px;
     border: none;
     width: 90px;
     height: 45px;
-  
   }
   .carr{
   }
@@ -76,7 +73,6 @@ font-size: 20px;
   }
   span{
     font-size:40px
-    
   }
   .logo{
     color: white;
