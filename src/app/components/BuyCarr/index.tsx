@@ -88,6 +88,11 @@ export const BuyCarr = () => {
 export const BuycarrContainer = styled.section`
 @media (max-width:600px){
   width: 100vw;
+  .item{
+
+    width:  90%;
+  }
+
 }
 position: fixed;
 justify-content: space-between;
