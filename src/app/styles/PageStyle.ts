@@ -20,5 +20,6 @@ margin: 0 2rem;
     flex-wrap: wrap;
     gap: 1rem;
   }
+  
 
 `

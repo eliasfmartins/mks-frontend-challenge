@@ -94,7 +94,7 @@ justify-content: space-between;
 top:0;
 right: 0;
 width: 486px;
-height: 100vh;
+height: 100%;
 background: #0F52BA;
 display: flex;
 flex-direction: column;

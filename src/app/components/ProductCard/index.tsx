@@ -67,10 +67,13 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: space-between;
+transition: 0.6s;
 border-radius: 8px;
   width: 217.56px;
   height: 285px;
-
+&:hover{
+scale: 1.1;
+}
  .buy{
   display: flex;
   align-items: center;
