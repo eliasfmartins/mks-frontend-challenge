@@ -75,7 +75,7 @@ export const BuyCarr = () => {
       <div className='total'>
 
         <h2>Total:</h2>
-        <h2>Total: R${valorTotal.toFixed(2)}</h2>
+        <h2>{`${valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}</h2>
       </div>
       <div className='finalizar'>
 
@@ -86,6 +86,9 @@ export const BuyCarr = () => {
   )
 }
 export const BuycarrContainer = styled.section`
+@media (max-width:600px){
+  width: 100vw;
+}
 position: fixed;
 justify-content: space-between;
 top:0;
@@ -178,6 +181,13 @@ box-shadow: -5px 0px 6px 0px #00000021;
     font-size: 13px;
     line-height: 17px;
     font-weight: 400;
+    min-width: 50px;
+    max-width: 50px;
+  }
+  .flex{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
   .qtd{
     display: flex;

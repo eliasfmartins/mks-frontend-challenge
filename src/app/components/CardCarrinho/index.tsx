@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 interface CartItemProps {
   item: {
@@ -15,10 +16,13 @@ interface CartItemProps {
 }
 
 export const CartItem: React.FC<CartItemProps> = ({ item, onRemove ,onDecrease,onIncrease }) => {
+  const totalPrice = parseFloat(item.price) * item.quantidade;
   return (
     <div className='item' key={item.id}>
       <button className='x' onClick={() => onRemove(item.id)}>X</button>
       <img src={item.photo} alt={item.name} />
+      <div className='flex'>
+
       <p>
         {item.name} <br />
         {item.brand}
@@ -31,8 +35,9 @@ export const CartItem: React.FC<CartItemProps> = ({ item, onRemove ,onDecrease,o
           <button onClick={() => onDecrease(item.id)}>-</button>
         </div>
       </div>
+      </div>
       <div className="price">
-      R${(parseFloat(item.price) * item.quantidade).toFixed(2)}
+      R${totalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </div>
     </div>
   );

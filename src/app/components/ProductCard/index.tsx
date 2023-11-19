@@ -19,7 +19,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
   const handleAddItem = (novoItem: typeof itensCar[0]) => {
     const itemIndex = itensCar.findIndex(item => item.id === novoItem.id);
-  
+
     if (itemIndex !== -1) {
       // Se o item já existe, aumente a quantidade
       const novoCarrinho = [...itensCar];
@@ -31,7 +31,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         window.alert('Você atingiu o limite de 3 produtos diferentes no carrinho.')
         return;
       }
-  
+
       // Adicione ao carrinho com quantidade 1
       setItensCar(prevItensCar => [...prevItensCar, { ...novoItem, quantidade: 1 }]);
     }
@@ -43,8 +43,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <img src={product.photo} alt="Produto" />
         <div>
           <div className="info">
-            <h2>{product.brand}</h2>
-            <div className="price">{`R$${product.price}`}</div>
+            <div>
+
+              <h2>{product.brand}&nbsp;
+                {product.name}
+
+              </h2>
+            </div>
+            <div className="price">{`${parseFloat(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}
+            </div>
           </div>
           <p>{product.description}</p>
         </div>
@@ -83,7 +90,7 @@ border-radius: 8px;
 `;
 
 const CardContent = styled.div`
-padding: 15px;
+padding: 5px;
 
 display: flex;
 align-items: center;
@@ -95,6 +102,10 @@ p{
 h2{
   font-weight: 400;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 1px;
+  width: 110px;
 }
 .info{
   display: flex;

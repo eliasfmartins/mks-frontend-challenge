@@ -17,10 +17,11 @@ export const Header = () => {
         <div className="carr">
           <button onClick={() => setOpenCar(true)}>
             <Carr />
-            0</button>
-            {itensCar.length >=1 &&<div className="length">
-              {itensCar.length}
-            </div>}
+
+            {itensCar.length}
+            </button>
+            
+           
 
         </div>
       </HeaderContent>
@@ -59,13 +60,11 @@ font-size: 20px;
   
   }
   .carr{
-    position: relative;
   }
   .length{
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
     width: 15px;
     height: 15px;
     padding: 15px;
