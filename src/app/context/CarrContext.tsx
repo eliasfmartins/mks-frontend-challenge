@@ -13,7 +13,9 @@ interface Product {
 }
 interface CarrinhoContextData {
   openCar: boolean
+  openCarClose: boolean
   setOpenCar: Dispatch<SetStateAction<boolean>>
+  setOpenCarClose: Dispatch<SetStateAction<boolean>>
   itensCar: Product[]
   setItensCar: Dispatch<SetStateAction<Product[]>>
 }
@@ -26,10 +28,11 @@ interface CarrinhoProviderProps {
 
 export const CarrinhoProvider: React.FC<CarrinhoProviderProps> = ({ children }) => {
   const [openCar, setOpenCar] = useState<boolean>(false)
+  const [openCarClose, setOpenCarClose] = useState<boolean>(false)
   const [itensCar, setItensCar] = useState<Product[]>([])
 
   return (
-    <CarrinhoContext.Provider value={{ openCar, setOpenCar, itensCar, setItensCar }}>
+    <CarrinhoContext.Provider value={{ openCar, setOpenCar, itensCar, setItensCar,openCarClose,setOpenCarClose }}>
       {children}
     </CarrinhoContext.Provider>
   )

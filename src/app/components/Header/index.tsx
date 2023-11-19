@@ -4,7 +4,7 @@ import { Carr } from './carr'
 import { useCarrinho } from '@/app/context/CarrContext'
 
 export const Header = () => {
-  const { setOpenCar, itensCar } = useCarrinho()
+  const { setOpenCar, itensCar ,openCarClose, setOpenCarClose } = useCarrinho()
 
   return (
     <HeaderContainer>
@@ -16,7 +16,7 @@ export const Header = () => {
           </p>
         </div>
         <div className="carr">
-          <button onClick={() => { setOpenCar(true) }}>
+          <button onClick={() => { setOpenCar(true) ;setOpenCarClose(false)}}>
             <Carr />
 
             {itensCar.length}

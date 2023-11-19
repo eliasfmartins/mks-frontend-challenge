@@ -18,7 +18,23 @@ interface Product {
 }
 export default function Home() {
   const [dataCards, setDataCards] = useState({ products: [], count: 0 })
-  const { openCar } = useCarrinho()
+  const { openCar, setOpenCar, openCarClose, setOpenCarClose } = useCarrinho()
+
+
+
+  useEffect(() => {
+    if (!openCarClose) {
+      // Aguarde a conclusão da animação de saída antes de desmontar o componente
+      const timeoutId = setTimeout(() => {
+        if (!openCar) {
+          setOpenCar(false);
+
+        }
+      }, 600); // Duração da animação em milissegundos
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [openCarClose]);
 
   useEffect(() => {
     const fetchData = async () => {

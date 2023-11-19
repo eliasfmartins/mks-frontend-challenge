@@ -2,10 +2,13 @@ import { useCarrinho } from '@/app/context/CarrContext';
 import styled from 'styled-components';
 import { CartItem } from '../CardCarrinho';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 export const BuyCarr = () => {
-  const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
+  const { openCar, setOpenCar, itensCar, setItensCar ,setOpenCarClose,openCarClose} = useCarrinho();
   const [valorTotal, setValorTotal] = useState<number>(0);
   const [quantidadeItens, setQuantidadeItens] = useState<number>(0);
+  const [isVisible, setIsVisible] = useState(true);
+
 
   useEffect(() => {
     // Atualizar o valor total e a quantidade de itens sempre que o carrinho for modificado
@@ -57,12 +60,15 @@ export const BuyCarr = () => {
     setValorTotal(total);
     setQuantidadeItens(quantidade);
   };
+  // 
   return (
-    <BuycarrContainer>
+    <BuycarrContainer as={motion.div}  initial={{ x: '100%' }} animate={{ x: openCarClose ? '100%' : 0 }}exit={{ x: '-100%' }}
+    transition={{ duration: 0.6 }}
+    >
       <div className='header'>
         <h2>Carrinho <br />
           de compras</h2>
-        <button onClick={() => setOpenCar(false)}>
+        <button onClick={() => setOpenCarClose(true)}>
           X
         </button>
       </div>
@@ -81,7 +87,7 @@ export const BuyCarr = () => {
 
         <button>Finalizar Compra</button>
       </div>
-    </BuycarrContainer>
+    </BuycarrContainer >
 
   )
 }
