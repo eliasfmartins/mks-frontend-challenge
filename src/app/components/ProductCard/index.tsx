@@ -78,11 +78,12 @@ border-radius: 8px;
   width: 100%;
   justify-content: center;
   border-radius: 0 0 8px 8px;
+	cursor: pointer;
+
 }
 `;
 
 const CardContent = styled.div`
-cursor: pointer;
 padding: 5px;
 display: flex;
 align-items: center;
