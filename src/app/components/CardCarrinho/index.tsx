@@ -27,12 +27,12 @@ export const CartItem: React.FC<CartItemProps> = ({ item, onRemove ,onDecrease,o
         Qtd:
         <div className='qtd'>
           <button onClick={() => onIncrease(item.id)}>+</button>
-          <div className='quantidadeprodutos'>{Number(item.quantidade)}</div>
+          <div className='quantidadeprodutos'>{item.quantidade}</div>
           <button onClick={() => onDecrease(item.id)}>-</button>
         </div>
       </div>
       <div className="price">
-      R${(parseFloat(item.price)).toFixed(2)}
+      R${(parseFloat(item.price) * item.quantidade).toFixed(2)}
       </div>
     </div>
   );

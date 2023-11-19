@@ -13,6 +13,7 @@ interface Product {
   price: string;
   createdAt: string;
   updatedAt: string;
+  quantidade: number
 }
 export default function Home() {
   const [dataCards, setDataCards] = useState({ products: [], count: 0 })

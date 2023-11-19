@@ -19,25 +19,17 @@ export const BuyCarr = () => {
     // Atualizar o estado do carrinho com o novo array
     setItensCar(novoCarrinho);
   };
-  const handleAddItem = (novoItem: typeof itensCar[0]) => {
-    const itemIndex = itensCar.findIndex(item => item.id === novoItem.id);
 
-    if (itemIndex !== -1) {
-      // Se o item já existe, aumente a quantidade
-      const novoCarrinho = [...itensCar];
-      novoCarrinho[itemIndex].quantidade += 1;
-      setItensCar(novoCarrinho);
-    } else {
-      // Se o item não existe, adicione ao carrinho com quantidade 1
-      setItensCar(prevItensCar => [...prevItensCar, { ...novoItem, quantidade: 1 }]);
-    }
-  };
 
   const handleIncreaseQuantity = (id: number) => {
     const novoCarrinho = [...itensCar];
     const itemIndex = novoCarrinho.findIndex(item => item.id === id);
-    novoCarrinho[itemIndex].quantidade += 1;
-    setItensCar(novoCarrinho);
+
+    if (itemIndex !== -1) {
+      novoCarrinho[itemIndex].quantidade += 1;
+      setItensCar(novoCarrinho);
+      console.log('Novo estado do carrinho após aumento de quantidade:', novoCarrinho);
+    }
   };
 
   const handleDecreaseQuantity = (id: number) => {
@@ -56,12 +48,12 @@ export const BuyCarr = () => {
   const calcularTotal = () => {
     let total = 0;
     let quantidade = 0;
-  
+
     itensCar.forEach(item => {
-      total += parseFloat(item.price);
-      quantidade+= item.quantidade;
+      total += parseFloat(item.price) * item.quantidade;
+      quantidade += item.quantidade;
     });
-  
+
     setValorTotal(total);
     setQuantidadeItens(quantidade);
   };

@@ -11,11 +11,25 @@ interface ProductCardProps {
     price: string;
     createdAt: string;
     updatedAt: string;
+    quantidade: number
   };
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
+  const handleAddItem = (novoItem: typeof itensCar[0]) => {
+    const itemIndex = itensCar.findIndex(item => item.id === novoItem.id);
+
+    if (itemIndex !== -1) {
+      // Se o item já existe, aumente a quantidade
+      const novoCarrinho = [...itensCar];
+      novoCarrinho[itemIndex].quantidade += 1;
+      setItensCar(novoCarrinho);
+    } else {
+      // Se o item não existe, adicione ao carrinho com quantidade 1
+      setItensCar(prevItensCar => [...prevItensCar, { ...novoItem, quantidade: 1 }]);
+    }
+  };
 
   return (
     <CardContainer key={product.id}>
@@ -29,7 +43,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <p>{product.description}</p>
         </div>
       </CardContent>
-      <div className="buy" onClick={() => setItensCar(prev => [...prev, product])}>
+      <div className="buy" onClick={() => handleAddItem(product)}>
         <Buycar /> COMPRAR
       </div>
     </CardContainer>
