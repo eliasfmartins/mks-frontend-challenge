@@ -82,6 +82,7 @@ border-radius: 8px;
 `;
 
 const CardContent = styled.div`
+cursor: pointer;
 padding: 5px;
 display: flex;
 align-items: center;
