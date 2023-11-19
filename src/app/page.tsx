@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { ProductCard } from './components/ProductCard'
 import { BuyCarr } from './components/BuyCarr'
 import { useCarrinho } from './context/CarrContext'
@@ -23,19 +23,41 @@ export default function Home() {
 
 
   useEffect(() => {
-    if (!openCarClose) {
+    if (openCarClose===true) {
       // Aguarde a conclusão da animação de saída antes de desmontar o componente
       const timeoutId = setTimeout(() => {
-        if (!openCar) {
-          setOpenCar(false);
+        setOpenCar(false);
+        
 
-        }
+
+
       }, 600); // Duração da animação em milissegundos
 
       return () => clearTimeout(timeoutId);
     }
   }, [openCarClose]);
+ 
+  useEffect(() => {
+    // Adiciona ou remove a classe no elemento html/body com base nas condições
+    const handleScrollLock = () => {
+      if (openCar && window.innerWidth <= 600) {
+        document.documentElement.style.overflow = 'hidden';
+      } else {
+        document.documentElement.style.overflow = ''; // Remova a propriedade overflow se openCar não estiver ativo ou se a largura da tela for maior que 600 pixels
+      }
+    };
 
+    // Chama a função inicialmente para garantir que o estado inicial seja configurado corretamente
+    handleScrollLock();
+
+    // Adiciona o listener do evento resize
+    window.addEventListener('resize', handleScrollLock);
+
+    // Remove o listener do evento resize ao desmontar o componente
+    return () => {
+      window.removeEventListener('resize', handleScrollLock);
+    };
+  }, [openCar]);
   useEffect(() => {
     const fetchData = async () => {
       try {

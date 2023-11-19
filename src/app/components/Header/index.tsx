@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Carr } from './carr'
 import { useCarrinho } from '@/app/context/CarrContext'
 
 export const Header = () => {
-  const { setOpenCar, itensCar ,openCarClose, setOpenCarClose } = useCarrinho()
-
+  const { setOpenCar,openCar, itensCar ,openCarClose, setOpenCarClose } = useCarrinho()
+  const handleCar = () => {
+    setOpenCar(true) 
+    setOpenCarClose(false)
+   
+  }
   return (
     <HeaderContainer>
       <HeaderContent>
@@ -16,7 +20,7 @@ export const Header = () => {
           </p>
         </div>
         <div className="carr">
-          <button onClick={() => { setOpenCar(true) ;setOpenCarClose(false)}}>
+          <button onClick={() => handleCar()}>
             <Carr />
 
             {itensCar.length}

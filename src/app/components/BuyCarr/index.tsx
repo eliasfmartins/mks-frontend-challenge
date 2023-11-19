@@ -7,7 +7,8 @@ export const BuyCarr = () => {
   const { openCar, setOpenCar, itensCar, setItensCar, setOpenCarClose, openCarClose } = useCarrinho();
   const [valorTotal, setValorTotal] = useState<number>(0);
   const [quantidadeItens, setQuantidadeItens] = useState<number>(0);
-  const [isVisible, setIsVisible] = useState(true);
+
+ 
 
 
   useEffect(() => {
@@ -93,9 +94,6 @@ export const BuyCarr = () => {
 }
 export const BuycarrContainer = styled.section`
 @media (max-width:600px){
-bottom: 0;
-top: 0;
-min-height: 100svh;
   position: fixed;
   width: 100vw;
   height: 100%;
