@@ -1,15 +1,15 @@
 import { useCarrinho } from "@/app/context/CarrContext";
 import styled from "styled-components";
 import { CartItem } from "../CardCarrinho";
-import { useEffect, useState } from "react";
+import { useEffect, } from "react";
 import { motion } from "framer-motion";
-export const BuyCarr = ({ quantidadeItens, setQuantidadeItens, setValorTotal, valorTotal }: {
+export const BuyCarr = ({ setQuantidadeItens, setValorTotal, valorTotal }: {
 	valorTotal: number,
 	setValorTotal: React.Dispatch<React.SetStateAction<number>>,
 	quantidadeItens: number,
 	setQuantidadeItens: React.Dispatch<React.SetStateAction<number>>,
 }) => {
-	const { openCar, setOpenCar, itensCar, setItensCar, setOpenCarClose, openCarClose } = useCarrinho();
+	const { itensCar, setItensCar, setOpenCarClose, openCarClose } = useCarrinho();
 	useEffect(() => {
 		// Atualizar o valor total e a quantidade de itens sempre que o carrinho for modificado
 		calcularTotal();
@@ -26,7 +26,6 @@ export const BuyCarr = ({ quantidadeItens, setQuantidadeItens, setValorTotal, va
 		if (itemIndex !== -1) {
 			novoCarrinho[itemIndex].quantidade += 1;
 			setItensCar(novoCarrinho);
-			console.log("Novo estado do carrinho após aumento de quantidade:", novoCarrinho);
 		}
 	};
 	const handleDecreaseQuantity = (id: number) => {
@@ -109,6 +108,8 @@ box-shadow: -5px 0px 6px 0px #00000021;
     border: none;
     color: white;
     background: black;
+		cursor: pointer;
+
   }
 }
 .total{
@@ -135,17 +136,20 @@ box-shadow: -5px 0px 6px 0px #00000021;
 }
 .carrinho{
   display: flex;
+	padding: 20px 0;
   justify-content: baseline;
   height: 75%;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+	overflow: scroll;
+	overflow-x: hidden;
 }
 .item{
   position: relative;
   background: white;
   width: 379px;
-  height: 95px;
+  min-height: 95px;
   box-shadow: -2px 2px 10px 0px #0000000D;
   border-radius: 8px;
   display: flex;
@@ -154,19 +158,21 @@ box-shadow: -5px 0px 6px 0px #00000021;
   justify-content: space-around;
   align-items:center; 
   .x{
+		cursor: pointer;
     border-radius: 50%;
+		font-size: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     border: none;
     color: white;
     background: black;
     position: absolute;
     top: -10px;
     right: -10px;
-    padding: 15px;
+    padding: 10px;
   }
   img{
     max-width: 55px;
@@ -224,7 +230,7 @@ box-shadow: -5px 0px 6px 0px #00000021;
     flex-direction: column;
   }
   .price{
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 700;
   }
   .button{

@@ -26,10 +26,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCard
 			novoCarrinho[itemIndex].quantidade += 1;
 			setItensCar(novoCarrinho);
 		} else {
-			if (itensCar.length >= 3) {
-				window.alert("Você atingiu o limite de 3 produtos diferentes no carrinho.");
-				return;
-			}
+
 
 			setItensCar(prevItensCar => [...prevItensCar, { ...novoItem, quantidade: 1 }]);
 		}
@@ -41,11 +38,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCard
 				<img src={product.photo} alt="Produto" />
 				<div>
 					<div className="info">
-						<div>
-
+						<div className="title">
 							<h2>{product.brand}&nbsp;
 								{product.name}
-
 							</h2>
 						</div>
 						<div className="price">{`${parseFloat(product.price).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`}
@@ -71,7 +66,6 @@ transition: 0.6s;
 border-radius: 8px;
   width: 217.56px;
   height: 285px;
-
  .buy{
   display: flex;
   align-items: center;
@@ -84,13 +78,11 @@ border-radius: 8px;
   width: 100%;
   justify-content: center;
   border-radius: 0 0 8px 8px;
-  
 }
 `;
 
 const CardContent = styled.div`
 padding: 5px;
-
 display: flex;
 align-items: center;
 flex-direction: column;
@@ -101,32 +93,34 @@ p{
 }
 h2{
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   display: flex;
   align-items: center;
-  padding: 1px;
-  width: 110px;
   ;
 }
 .info{
   display: flex;
   justify-content: space-between;
   align-items: center;
+	height: 50px;
+	max-width: 100%;
 }
 .price{
   background: #373737;
   padding: 5px;
   color: white;
   border-radius: 5px;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
   margin-left: 10px;
-
+}
+.title{
+	background: white;
+	padding: 5px;
 }
 img{
   max-width: 148px;
   height: 120px;
   margin-bottom: 5px;
  }
-
 `;
