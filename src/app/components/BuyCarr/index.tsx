@@ -4,7 +4,7 @@ import { CartItem } from '../CardCarrinho';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 export const BuyCarr = () => {
-  const { openCar, setOpenCar, itensCar, setItensCar ,setOpenCarClose,openCarClose} = useCarrinho();
+  const { openCar, setOpenCar, itensCar, setItensCar, setOpenCarClose, openCarClose } = useCarrinho();
   const [valorTotal, setValorTotal] = useState<number>(0);
   const [quantidadeItens, setQuantidadeItens] = useState<number>(0);
   const [isVisible, setIsVisible] = useState(true);
@@ -62,8 +62,8 @@ export const BuyCarr = () => {
   };
   // 
   return (
-    <BuycarrContainer as={motion.div}  initial={{ x: '100%' }} animate={{ x: openCarClose ? '100%' : 0 }}exit={{ x: '-100%' }}
-    transition={{ duration: 0.6 }}
+    <BuycarrContainer as={motion.div} initial={{ x: '100%' }} animate={{ x: openCarClose ? '100%' : 0 }} exit={{ x: '-100%' }}
+      transition={{ duration: 0.6 }}
     >
       <div className='header'>
         <h2>Carrinho <br />
@@ -94,6 +94,7 @@ export const BuyCarr = () => {
 export const BuycarrContainer = styled.section`
 @media (max-width:600px){
   width: 100vw;
+  height: 100vh;
   .item{
 
     width:  90%;
