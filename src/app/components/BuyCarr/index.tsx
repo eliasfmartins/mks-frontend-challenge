@@ -151,6 +151,8 @@ box-shadow: -5px 0px 6px 0px #00000021;
   box-shadow: -2px 2px 10px 0px #0000000D;
   border-radius: 8px;
   display: flex;
+  padding: 8px;
+  gap: 1rem;
   justify-content: space-around;
   align-items:center; 
   .x{

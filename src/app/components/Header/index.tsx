@@ -18,6 +18,9 @@ export const Header = () => {
           <button onClick={() => setOpenCar(true)}>
             <Carr />
             0</button>
+            {itensCar.length >=1 &&<div className="length">
+              {itensCar.length}
+            </div>}
 
         </div>
       </HeaderContent>
@@ -51,9 +54,26 @@ font-size: 20px;
     padding: 20px;
     border-radius: 8px;
     border: none;
-  width: 90px;
-  height: 45px;
+    width: 90px;
+    height: 45px;
   
+  }
+  .carr{
+    position: relative;
+  }
+  .length{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    padding: 15px;
+    border-radius: 50%;
+    background: red;
+    bottom: -10px;
+    left: -10px;
+    font-weight: 700;
   }
   span{
     font-size:40px

@@ -19,14 +19,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { openCar, setOpenCar, itensCar, setItensCar } = useCarrinho();
   const handleAddItem = (novoItem: typeof itensCar[0]) => {
     const itemIndex = itensCar.findIndex(item => item.id === novoItem.id);
-
+  
     if (itemIndex !== -1) {
       // Se o item já existe, aumente a quantidade
       const novoCarrinho = [...itensCar];
       novoCarrinho[itemIndex].quantidade += 1;
       setItensCar(novoCarrinho);
     } else {
-      // Se o item não existe, adicione ao carrinho com quantidade 1
+      // Se o item não existe, verifique se o número de produtos diferentes no carrinho é menor que 3
+      if (itensCar.length >= 3) {
+        window.alert('Você atingiu o limite de 3 produtos diferentes no carrinho.')
+        return;
+      }
+  
+      // Adicione ao carrinho com quantidade 1
       setItensCar(prevItensCar => [...prevItensCar, { ...novoItem, quantidade: 1 }]);
     }
   };
