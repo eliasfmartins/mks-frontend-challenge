@@ -93,6 +93,8 @@ export const BuyCarr = () => {
 }
 export const BuycarrContainer = styled.section`
 @media (max-width:600px){
+
+  position: fixed;
   width: 100vw;
   height: 100%;
   .item{
