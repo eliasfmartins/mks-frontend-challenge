@@ -1,44 +1,40 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { Carr } from './carr'
-import { useCarrinho } from '@/app/context/CarrContext'
-
+import styled from "styled-components";
+import { Carr } from "./carr";
+import { useCarrinho } from "@/app/context/CarrContext";
 export const Header = () => {
-  const { setOpenCar,openCar, itensCar ,openCarClose, setOpenCarClose } = useCarrinho()
-  const handleCar = () => {
-    setOpenCar(true) 
-    setOpenCarClose(false)
-   
-  }
-  return (
-    <HeaderContainer>
-      <HeaderContent>
-        <div className="logo">
-          <span>MKS</span>
-          <p>
-            Sistemas
-          </p>
-        </div>
-        <div className="carr">
-          <button onClick={() => handleCar()}>
-            <Carr />
-
-            {itensCar.length}
-          </button>
-
-        </div>
-      </HeaderContent>
-    </HeaderContainer>
-  )
-}
+	const { setOpenCar, itensCar, setOpenCarClose } = useCarrinho();
+	const handleCar = () => {
+		setOpenCar(true);
+		setOpenCarClose(false);
+	};
+	return (
+		<HeaderContainer>
+			<HeaderContent>
+				<div className='logo'>
+					<span>MKS</span>
+					<p>
+						Sistemas
+					</p>
+				</div>
+				<div className='carr'>
+					<button onClick={() => {
+						handleCar();
+					}}>
+						<Carr />
+						{itensCar.length}
+					</button>
+				</div>
+			</HeaderContent>
+		</HeaderContainer>
+	);
+};
 export const HeaderContainer = styled.header`
  display: flex;
  justify-content: center;
  align-items: center;
   background: #0F52BA;
   height: 101px;
-
-`
+`;
 export const HeaderContent = styled.div`
 font-size: 20px;
   display: flex;
@@ -84,5 +80,4 @@ font-size: 20px;
     gap: 0.5rem;
     align-items: baseline;
   }
-
-`
+`;

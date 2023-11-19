@@ -1,107 +1,90 @@
-import { useCarrinho } from '@/app/context/CarrContext';
-import styled from 'styled-components';
-import { CartItem } from '../CardCarrinho';
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-export const BuyCarr = () => {
-  const { openCar, setOpenCar, itensCar, setItensCar, setOpenCarClose, openCarClose } = useCarrinho();
-  const [valorTotal, setValorTotal] = useState<number>(0);
-  const [quantidadeItens, setQuantidadeItens] = useState<number>(0);
-
- 
-
-
-  useEffect(() => {
-    // Atualizar o valor total e a quantidade de itens sempre que o carrinho for modificado
-    calcularTotal();
-  }, [itensCar]);
-
-  const handleRemoveItem = (id: number) => {
-    // Filtrar os itens do carrinho para remover o item com o ID correspondente
-    const novoCarrinho = itensCar.filter(item => item.id !== id);
-
-    // Atualizar o estado do carrinho com o novo array
-    setItensCar(novoCarrinho);
-  };
-
-
-  const handleIncreaseQuantity = (id: number) => {
-    const novoCarrinho = [...itensCar];
-    const itemIndex = novoCarrinho.findIndex(item => item.id === id);
-
-    if (itemIndex !== -1) {
-      novoCarrinho[itemIndex].quantidade += 1;
-      setItensCar(novoCarrinho);
-      console.log('Novo estado do carrinho após aumento de quantidade:', novoCarrinho);
-    }
-  };
-
-  const handleDecreaseQuantity = (id: number) => {
-    const novoCarrinho = [...itensCar];
-    const itemIndex = novoCarrinho.findIndex(item => item.id === id);
-
-    if (novoCarrinho[itemIndex].quantidade > 1) {
-      novoCarrinho[itemIndex].quantidade -= 1;
-    } else {
-      novoCarrinho.splice(itemIndex, 1);
-    }
-
-    setItensCar(novoCarrinho);
-  };
-
-  const calcularTotal = () => {
-    let total = 0;
-    let quantidade = 0;
-
-    itensCar.forEach(item => {
-      total += parseFloat(item.price) * item.quantidade;
-      quantidade += item.quantidade;
-    });
-
-    setValorTotal(total);
-    setQuantidadeItens(quantidade);
-  };
-  // 
-  return (
-    <BuycarrContainer as={motion.div} initial={{ x: '100%' }} animate={{ x: openCarClose ? '100%' : 0 }} exit={{ x: '-100%' }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className='header'>
-        <h2>Carrinho <br />
-          de compras</h2>
-        <button onClick={() => setOpenCarClose(true)}>
-          X
-        </button>
-      </div>
-      <div className='carrinho'>
-        {itensCar.map(item => (
-          <CartItem key={item.id} item={item} onRemove={handleRemoveItem} onIncrease={() => handleIncreaseQuantity(item.id)}
-            onDecrease={() => handleDecreaseQuantity(item.id)} />
-        ))}
-      </div>
-      <div className='total'>
-
-        <h2>Total:</h2>
-        <h2>{`${valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}</h2>
-      </div>
-      <div className='finalizar'>
-
-        <button>Finalizar Compra</button>
-      </div>
-    </BuycarrContainer >
-
-  )
-}
+import { useCarrinho } from "@/app/context/CarrContext";
+import styled from "styled-components";
+import { CartItem } from "../CardCarrinho";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+export const BuyCarr = ({ quantidadeItens, setQuantidadeItens, setValorTotal, valorTotal }: {
+	valorTotal: number,
+	setValorTotal: React.Dispatch<React.SetStateAction<number>>,
+	quantidadeItens: number,
+	setQuantidadeItens: React.Dispatch<React.SetStateAction<number>>,
+}) => {
+	const { openCar, setOpenCar, itensCar, setItensCar, setOpenCarClose, openCarClose } = useCarrinho();
+	useEffect(() => {
+		// Atualizar o valor total e a quantidade de itens sempre que o carrinho for modificado
+		calcularTotal();
+	}, [itensCar]);
+	const handleRemoveItem = (id: number) => {
+		// Filtrar os itens do carrinho para remover o item com o ID correspondente
+		const novoCarrinho = itensCar.filter(item => item.id !== id);
+		// Atualizar o estado do carrinho com o novo array
+		setItensCar(novoCarrinho);
+	};
+	const handleIncreaseQuantity = (id: number) => {
+		const novoCarrinho = [...itensCar];
+		const itemIndex = novoCarrinho.findIndex(item => item.id === id);
+		if (itemIndex !== -1) {
+			novoCarrinho[itemIndex].quantidade += 1;
+			setItensCar(novoCarrinho);
+			console.log("Novo estado do carrinho após aumento de quantidade:", novoCarrinho);
+		}
+	};
+	const handleDecreaseQuantity = (id: number) => {
+		const novoCarrinho = [...itensCar];
+		const itemIndex = novoCarrinho.findIndex(item => item.id === id);
+		if (novoCarrinho[itemIndex].quantidade > 1) {
+			novoCarrinho[itemIndex].quantidade -= 1;
+		} else {
+			novoCarrinho.splice(itemIndex, 1);
+		}
+		setItensCar(novoCarrinho);
+	};
+	const calcularTotal = () => {
+		let total = 0;
+		let quantidade = 0;
+		itensCar.forEach(item => {
+			total += parseFloat(item.price) * item.quantidade;
+			quantidade += item.quantidade;
+		});
+		setValorTotal(total);
+		setQuantidadeItens(quantidade);
+	};
+	// 
+	return (
+		<BuycarrContainer as={motion.div} initial={{ x: "100%" }} animate={{ x: openCarClose ? "100%" : 0 }} exit={{ x: "-100%" }}
+			transition={{ duration: 0.6 }}
+		>
+			<div className='header'>
+				<h2>Carrinho <br />
+					de compras</h2>
+				<button onClick={() => setOpenCarClose(true)}>
+					X
+				</button>
+			</div>
+			<div className='carrinho'>
+				{itensCar.map(item => (
+					<CartItem key={item.id} item={item} onRemove={handleRemoveItem} onIncrease={() => handleIncreaseQuantity(item.id)}
+						onDecrease={() => handleDecreaseQuantity(item.id)} />
+				))}
+			</div>
+			<div className='total'>
+				<h2>Total:</h2>
+				<h2>{`${valorTotal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`}</h2>
+			</div>
+			<div className='finalizar'>
+				<button>Finalizar Compra</button>
+			</div>
+		</BuycarrContainer >
+	);
+};
 export const BuycarrContainer = styled.section`
 @media (max-width:600px){
   position: fixed;
   width: 100vw;
   height: 100%;
   .item{
-
     width:  90%;
   }
-
 }
 position: fixed;
 justify-content: space-between;
@@ -135,8 +118,6 @@ box-shadow: -5px 0px 6px 0px #00000021;
   align-items: center;
   padding: 1rem 2rem;
   color: white;
-
-
 }
 .finalizar{
   background: black;
@@ -224,7 +205,6 @@ box-shadow: -5px 0px 6px 0px #00000021;
     justify-content: center;
     height: 30px;
     }
-    
   }
   .quantidadeprodutos{
     font-size: 15px;
@@ -237,7 +217,6 @@ box-shadow: -5px 0px 6px 0px #00000021;
     border-left: solid lightgray 1px ;
     border-right: solid lightgray 1px ;
   }
- 
   .quantidade{
     font-size: 5px;
     display: flex;
@@ -251,4 +230,4 @@ box-shadow: -5px 0px 6px 0px #00000021;
   .button{
     width: 5px;
   }
-}`
+}`;
