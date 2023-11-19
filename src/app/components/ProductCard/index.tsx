@@ -19,6 +19,7 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCardProps) => {
 	const { itensCar, setItensCar } = useCarrinho();
 	const handleAddItem = (novoItem: typeof itensCar[0]) => {
+		window.alert(`${product.name} foi adicionado ao carrinho`);
 		const itemIndex = itensCar.findIndex(item => item.id === novoItem.id);
 
 		if (itemIndex !== -1) {
