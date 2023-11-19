@@ -96,6 +96,7 @@ flex-direction: column;
 p{
   font-size: 10px;
   margin-top: 5px;
+  padding: 5px;
 }
 h2{
   font-weight: 400;
@@ -104,6 +105,7 @@ h2{
   align-items: center;
   padding: 1px;
   width: 110px;
+  ;
 }
 .info{
   display: flex;
@@ -117,6 +119,7 @@ h2{
   border-radius: 5px;
   font-size: 15px;
   font-weight: 700;
+  margin-left: 10px;
 
 }
 img{
