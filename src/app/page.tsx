@@ -18,11 +18,18 @@ type Product = {
 	quantidade: number;
 };
 
+// Define a estrutura de dados para o estado dataCards
+type DataCards = {
+	products: Product[];
+	count: number;
+};
+
 export default function Home() {
-	const [dataCards, setDataCards] = useState({ products: [], count: 0 });
+	const [dataCards, setDataCards] = useState<DataCards>({ products: [], count: 0 });
 	const { openCar, setOpenCar, openCarClose, itensCar, setItensCar } = useCarrinho();
 	const [valorTotal, setValorTotal] = useState<number>(0);
 	const [quantidadeItens, setQuantidadeItens] = useState<number>(0);
+
 	const calcularTotal = () => {
 		let total = 0;
 		let quantidade = 0;
@@ -39,7 +46,7 @@ export default function Home() {
 	useEffect(() => {
 		const loadLocalStorageData = () => {
 			const storedItensCar = JSON.parse(localStorage.getItem("itensCar") || "[]");
-			if (storedItensCar.length != 0) {
+			if (storedItensCar.length !== 0) {
 				setItensCar(storedItensCar);
 			}
 			calcularTotal();
@@ -54,7 +61,7 @@ export default function Home() {
 		console.log(localStorage);
 		calcularTotal();
 	}, [itensCar]);
-  
+
 	useEffect(() => {
 		if (openCarClose) {
 			const timeoutId = setTimeout(() => {
@@ -84,6 +91,7 @@ export default function Home() {
 			window.removeEventListener("resize", handleScrollLock);
 		};
 	}, [openCar]);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -92,22 +100,29 @@ export default function Home() {
 				setDataCards(data);
 			} catch (error) {
 				console.error("Erro ao obter dados:", error);
-				setDataCards(localData);
+				setDataCards(localData as DataCards); // Tipificando `localData` como `DataCards`
 			}
 		};
 
 		fetchData();
 	}, []);
+
 	return (
 		<PageContainer>
 			<PageContent>
-				<div className='cards'>
+				<div className="cards">
 					{dataCards.products.map((product: Product) => (
 						<ProductCard key={product.id} product={product} />
 					))}
 				</div>
-				{openCar && <BuyCarr valorTotal={valorTotal} setValorTotal={setValorTotal} quantidadeItens={quantidadeItens} setQuantidadeItens={setQuantidadeItens}
-				/>}
+				{openCar && (
+					<BuyCarr
+						valorTotal={valorTotal}
+						setValorTotal={setValorTotal}
+						quantidadeItens={quantidadeItens}
+						setQuantidadeItens={setQuantidadeItens}
+					/>
+				)}
 			</PageContent>
 		</PageContainer>
 	);
