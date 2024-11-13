@@ -4,6 +4,7 @@ import { ProductCard } from "./components/ProductCard";
 import { BuyCarr } from "./components/BuyCarr";
 import { useCarrinho } from "./context/CarrContext";
 import { PageContainer, PageContent } from "./styles/PageStyle";
+import localData from "./api/api.json";
 
 type Product = {
 	id: number;
@@ -22,7 +23,6 @@ export default function Home() {
 	const { openCar, setOpenCar, openCarClose, itensCar, setItensCar } = useCarrinho();
 	const [valorTotal, setValorTotal] = useState<number>(0);
 	const [quantidadeItens, setQuantidadeItens] = useState<number>(0);
-
 	const calcularTotal = () => {
 		let total = 0;
 		let quantidade = 0;
@@ -37,15 +37,11 @@ export default function Home() {
 	};
 
 	useEffect(() => {
-		console.log("Antes de carregar do localStorage");
-
 		const loadLocalStorageData = () => {
-
 			const storedItensCar = JSON.parse(localStorage.getItem("itensCar") || "[]");
 			if (storedItensCar.length != 0) {
 				setItensCar(storedItensCar);
 			}
-
 			calcularTotal();
 		};
 
@@ -58,7 +54,7 @@ export default function Home() {
 		console.log(localStorage);
 		calcularTotal();
 	}, [itensCar]);
-
+  
 	useEffect(() => {
 		if (openCarClose) {
 			const timeoutId = setTimeout(() => {
@@ -96,6 +92,7 @@ export default function Home() {
 				setDataCards(data);
 			} catch (error) {
 				console.error("Erro ao obter dados:", error);
+				setDataCards(localData);
 			}
 		};
 
